@@ -9,6 +9,7 @@ class Video(models.Model):
     pub_date = models.DateTimeField('date published')
     video_url = "404" #서버에서 URL로 보관하여 시청 페이지에서 볼 것
     uploader = models.CharField(max_length=200)
+    views = 0
 
     def __str__(self):
         return self.title

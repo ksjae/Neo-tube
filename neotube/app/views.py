@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at 너튜브.")
+    return render(request, 'main.html')
 
 def signup(request):
     if request.method == 'POST':
