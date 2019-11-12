@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}너튜브 - 세상의 모든 동영상!{% endblock %}
+{% block style %}
+#intro_video {
+   -ms-transform: translateX(-25%);
+    -moz-transform: translateX(-25%);
+    -webkit-transform: translateX(-25%);
+    transform: translateX(-25%) ;
+    position: fixed;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+width: 200%;
+height: 100%;
+z-index: -1000;
+}
+{% endblock style %}
 {% block content %}
-<video width="960" height="540" autoplay controls>
+<video id="intro_video" autoplay muted>
   {% load static %}
   <source src="{% static '/app/NEOTUBE_INTRO.mp4' %}" type="video/mp4">
 Your browser does not support the video tag.
