@@ -47,9 +47,9 @@
       </ul>
       <form class="mx-2 my-auto d-inline w-100">
         <div class="input-group">
-          <input type="text" class="form-control border border-right-0" placeholder="영상 찾아보기">
+          <input type="text" class="form-control border border-right-0 bg-dark text-white border-secondary" placeholder="영상 찾아보기">
           <span class="input-group-append">
-            <button class="btn btn-outline-secondary border border-left-0" type="button">
+            <button class="btn btn-outline-secondary border border-left-0 border-secondary bg-dark text-white " type="button">
               <i class="fa fa-search"></i>
             </button>
           </span>
@@ -63,7 +63,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             {% if user.is_authenticated %}
-            <a class="dropdown-item"><strong>{{user.username}}로 로그인됨<strong></a>
+            <a class="dropdown-item"><strong>{{user.username}}로 로그인됨</strong></a>
             <a href="{% url 'logout' %}" class="dropdown-item">로그아웃</a>
             {% else %}
             <a href="{% url 'login' %}" class="dropdown-item">로그인</a>

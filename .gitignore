@@ -3,4 +3,4 @@ neotube/.DS_Store
 .DS_Store
 django.code-workspace
 neotube/media/*
-neotube/app/__pycache__/*.cpython-37.pyc
+neotube/app/__pycache__/*

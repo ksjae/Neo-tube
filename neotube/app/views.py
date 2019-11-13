@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.template.response import TemplateResponse
 from .forms import *
 from django.views.generic.edit import FormView
+from django.views.generic import ListView, DetailView
 from .models import *
 
 # Create your views here.
@@ -13,7 +13,7 @@ def index(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = NewUserForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -22,7 +22,7 @@ def signup(request):
             login(request, user)
             return redirect('index')
     else:
-        form = UserCreationForm()
+        form = NewUserForm()
     args = dict()
     args['form'] = form
     return TemplateResponse(request, 'signup.html', args)
@@ -60,3 +60,26 @@ def showvideo(request):
 			}
 
 	return render(request, 'videos.html', context)
+
+class VideoDetailView(DetailView):
+    queryset = Video.objects.all()
+
+
+
+class VideoListView(ListView):
+
+    paginate_by = 10  # <app>/<modelname>_list.html 
+
+    def get_queryset(self, *args, **kwargs):
+        qs = Video.objects.all()
+        print(self.request.GET)
+        query = self.request.GET.get("q", None)
+        if query is not None:
+            qs = qs.filter(
+                Q(Video_Description__icontains=query) | Q(videofile__icontains=query))
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(VideoListView, self).get_context_data(*args, **kwargs)
+
+        return context
