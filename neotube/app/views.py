@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.template.response import TemplateResponse
 from .forms import *
 from django.views.generic.edit import FormView
 from .models import *
@@ -22,6 +23,7 @@ def signup(request):
             return redirect('index')
     else:
         form = UserCreationForm()
+    args = dict()
     args['form'] = form
     return TemplateResponse(request, 'signup.html', args)
 
@@ -43,14 +45,18 @@ class SearchFormView():
 # Create your views here.
 def showvideo(request):
 	lastvideo= Video.objects.last()
-	videofile=lastvideo.videofile
+	#videofile=lastvideo.videofile
 
 	form= VideoForm(request.POST)
 	if form.is_valid():
 		form.save()
-
+	"""
 	context= {'videofile': videofile,
 				'form': form
 			}
+	"""
+	context= {
+				'form': form
+			}
 
-	return render(request, 'neotube/videos.html', context)
+	return render(request, 'videos.html', context)

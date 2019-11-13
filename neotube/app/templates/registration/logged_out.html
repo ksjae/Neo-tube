@@ -1,10 +1,10 @@
 
 {% extends '../base.html' %}
 
-{% block title %}See you!{% endblock %}
+{% block title %}너튜브에서 로그아웃함{% endblock %}
 
 {% block content %}
-  <h2>Logged out</h2>
-  <p>You have been successfully logged out.</p>
-  <p><a href="{% url 'login' %}">Log in</a> again.</p>
+  <h2>로그아웃 하였습니다.</h2>
+  <p>로그아웃 상태에서도 너튜브를 이용하실 수 있습니다.</p>
+  <p><a href="{% url 'login' %}">다시 로그인하고 싶으신가요?</a></p>
 {% endblock %}

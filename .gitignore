@@ -1,5 +1,6 @@
 neotube/app/migrations/.DS_Store
 neotube/.DS_Store
 .DS_Store
-neotube/.DS_Store
 django.code-workspace
+neotube/media/*
+neotube/app/__pycache__/*.cpython-37.pyc
