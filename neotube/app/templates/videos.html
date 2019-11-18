@@ -1,20 +1,72 @@
 {% extends 'base.html' %}
 {% block title %}Upload Videos{% endblock title %}
+{% block style %}
+.file-upload input[type='file'] {
+  display: none;
+}
+{% endblock style %}
 {% block content %}
-<h1>Video Uploader</h1>
-<form enctype="multipart/form-data" method="POST" action="">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Upload"/>
-</form>
+<section>
+  <div class="container">
+    <!-- For demo purpose -->
+    <div class="row text-center text-white">
+      <div class="col-lg-10 mx-auto">
+        <h1 class="display-4">File upload button </h1>
+        <p class="lead">Build a simple file upload button using Bootstrap 4.</p>
+      </div>
+    </div>
+    <!-- End -->
 
-<br><br>
-<video width='400' controls>
-<source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>
-Your browser does not support the video tag.
-</video>
-<br><br>
-<h3>{{name}}</h3>
-</p>
+
+    <div class="row">
+      <div class="col-lg-5 mx-auto">
+        <div class="p-5 bg-white shadow rounded-lg"><img src="https://res.cloudinary.com/mhmd/image/upload/v1557366994/img_epm3iz.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
+
+          <!-- Default bootstrap file upload-->
+
+          <h6 class="text-center mb-4 text-muted">
+            You can use default Bootstrap file upload
+          </h6>
+
+          <div class="custom-file rounded-pill mb-5">
+            <form enctype="multipart/form-data" method="POST" action="">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+              {{ hidden_field.errors }}
+              {{ hidden_field }}
+            {% endfor %}
+            {% for field in forms.visible_fields %}
+                {{ field.label_tag }}
+                {{field}}
+                {{ field.errors }}
+            {% endfor %}
+            <input type="submit" value="Upload"/>
+            </form>
+          </div>
+          <!-- End -->
+
+          <h6 class="text-center mb-4 text-muted">
+            Or a custom button that launches file browser
+          </h6>
+
+          <!-- Custom bootstrap upload file-->
+          <label for="fileUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
+                        <input id="fileUpload" type="file">
+          </label>
+          <!-- End -->
+          {% if videofile %}
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <video width='400' controls>
+            <source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>
+            Your browser does not support the video tag.
+            </video>
+            <br><br>
+            <h3>{{name}}</h3>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}

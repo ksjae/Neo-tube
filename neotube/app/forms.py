@@ -27,12 +27,3 @@ class VideoForm(forms.ModelForm):
 
     def __str__(self):
         return self.Video_Description + ": " + str(self.id)
-
-class UserLoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
-
-    username = forms.Field(widget=forms.TextInput(
-        attrs={'class':"form-control", 'id':"username", 'aria-describedby':"emailHelp", 'placeholder':"아이디 입력"}))
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class':"form-control", 'id':"password", 'aria-describedby':"emailHelp", 'placeholder':"비밀번호 입력"}))
