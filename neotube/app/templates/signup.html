@@ -8,6 +8,20 @@
 {% endblock style %}
 {% block content %}
 <div class="container">
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+    {% endfor %}
+{% endif %}
   <div class="row">
     <div class="col-md-5 mx-auto">
       <div id="second">
@@ -17,17 +31,27 @@
               <h1>회원가입</h1>
             </div>
           </div>
-          <form action="#" name="registration">
+          <form action="#" name="registration" method="POST">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+              {{ hidden_field.errors }}
+              {{ hidden_field }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
             <div class="form-group">
-              <label for="{{ form.username.id_for_label }}">아이디</label>
-                              {{ form.username }}
-                              {{ form.username.errors }}
+                              {{ field.label_tag }}
+                              <input
+                                {% if field.name == "username" %}type="text"
+                                {% else %}type="password"{% endif %}
+                                name="{{ field.name }}"
+                                id="{{ field.id_for_label }}"
+                                {% if field.value != None %}value="{{ field.value|stringformat:'s' }}"{% endif %}
+                                maxlength="{{ field.max_length }}"
+                                {% if field.required %}required{% endif %}
+                                class="form-control">
+                              {{ field.errors }}
             </div>
-            <div class="form-group">
-              <label for="{{ form.password.id_for_label }}">비밀번호</label>
-                              {{ form.password }}
-                              {{ form.password.errors }}
-            </div>
+            {% endfor %}
             <div class="form-group" id="tos">
                               <p class="text-center">*회원가입시 <a href="#">개인정보취급방침</a> 및 <a href="#">이용약관</a>에 동의합니다.</p>
                            </div>

@@ -6,25 +6,32 @@ from .forms import *
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
 from .models import *
+from django.forms.utils import ErrorList
 
 # Create your views here.
 def index(request):
     return render(request, 'main.html')
 
 def signup(request):
+    try_again = ""
     if request.method == 'POST':
-        form = NewUserForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password')
+            raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('index')
+        else:
+            try_again = True
+            print("Oops")
     else:
-        form = NewUserForm()
+        form = UserCreationForm()
     args = dict()
     args['form'] = form
+    if try_again != "":
+        args['error'] = try_again
     return TemplateResponse(request, 'signup.html', args)
 
 class SearchFormView(): 
