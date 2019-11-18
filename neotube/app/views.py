@@ -42,7 +42,7 @@ class SearchFormView():
 # Create your views here.
 def showvideo(request):
 	lastvideo= Video.objects.last()
-	videofile=lastvideo.videofile
+	videofile=lastvideo
 
 	form= VideoForm(request.POST)
 	if form.is_valid():

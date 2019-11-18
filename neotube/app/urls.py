@@ -6,5 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     url(r'^signup/$', views.signup , name='signup'),
     url(r'^search/$', views.SearchFormView, name='search'),
-    url(r'^$',views.showvideo,name='showvideo'),
+    url(r'^video/$',views.showvideo,name='showvideo'),
 ]
