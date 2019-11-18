@@ -6,7 +6,7 @@ from . import views, forms
 urlpatterns = [
     path('', views.index, name='index'),
     url(r'^signup/$', views.signup , name='signup'),
-    url(r'^search/$', views.SearchFormView, name='search'),
+    url(r'^search/$', views.SearchFormView.as_view(), name='search'),
     url(r'^video/$',views.showvideo,name='showvideo'),
     url(r'^login/$', auth_views.LoginView.as_view(
             template_name="registration/login.html",
