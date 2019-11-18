@@ -4,3 +4,7 @@ neotube/.DS_Store
 django.code-workspace
 neotube/media/*
 neotube/app/__pycache__/*
+neotube/app/migrations/__pycache__/*
+
+neotube/neotube/__pycache__/*
+
