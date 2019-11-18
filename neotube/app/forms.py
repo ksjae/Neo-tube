@@ -35,13 +35,3 @@ class UserLoginForm(AuthenticationForm):
         attrs={'class':"form-control", 'id':"username", 'aria-describedby':"emailHelp", 'placeholder':"아이디 입력"}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={'class':"form-control", 'id':"password", 'aria-describedby':"emailHelp", 'placeholder':"비밀번호 입력"}))
-
-class NewUserForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super(NewUserForm, self).__init__(*args, **kwargs)
-
-    username = forms.Field(widget=forms.TextInput(
-        attrs={'class':"form-control", 'id':"username", 'aria-describedby':"emailHelp", 'placeholder':"이메일도 가능"}))
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class':"form-control", 'id':"password", 'aria-describedby':"emailHelp", 'placeholder':"8자 이상"}))
-
