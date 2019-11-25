@@ -1,23 +1,70 @@
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Upload Videos</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Upload Videos{% endblock title %}
+{% block style %}
+.file-upload input[type='file'] {
+  display: none;
+}
+{% endblock style %}
+{% block content %}
+<section>
+  <div class="container">
+      <div class="row">
+      <div class="col-lg-5 mx-auto">
+        <div class="p-5 bg-white shadow rounded-lg"><img src="https://res.cloudinary.com/mhmd/image/upload/v1557366994/img_epm3iz.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
 
 <h1>Video Uploader</h1>
-<form enctype="multipart/form-data" method="POST" action="">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Upload"/>
-</form>
-
+<div class="custom-file rounded-pill mb-5">
+            <form enctype="multipart/form-data" method="POST" action="">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+              {{ hidden_field.errors }}
+              {{ hidden_field }}
+            {% endfor %}
+            <div class="form-group">
+            {% for field in form.visible_fields %}
+                {% if field.name == "videofile" %}
+                <div class="custom-file">
+                <input
+                    type="file"
+                    name="{{ field.name }}"
+                    id="{{ field.id_for_label }}"
+                    {% if field.value != None %}value="{{ field.value|stringformat:'s' }}"{% endif %}
+                    maxlength="{{ field.max_length }}"
+                    {% if field.required %}required{% endif %}
+                    class="custom-file-input"
+                    accept="video/*">
+                <label class="custom-file-label" for="{{ field.id_for_label }}">동영상 선택하기</label>
+                </div>
+                <br />
+                <br />
+                {% else %}
+                {{ field.label_tag }}
+                {{field}}
+                {% endif %}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+            <input type="submit" value="Upload" class="btn btn-primary float-right"/>
+            </form>
+            <br />
+                <br />
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <br><br>
 <video width='400' controls>
-<source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>
+<source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4' id="video_here">
 Your browser does not support the video tag.
 </video>
 <br><br>
-</p>
-</body>
-<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'p3plcpnl0769'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script><script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'p3plcpnl0769'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>
+<script>
+$(document).on("change", ".custom-file-input", function(evt) {
+  var $source = $('#video_here');
+  $source[0].src = URL.createObjectURL(this.files[0]);
+  $source.parent()[0].load();
+});
+</script>
+{% endblock content %}

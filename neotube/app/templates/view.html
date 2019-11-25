@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{{video.name}}{% endblock title %}
+{% block style %}
+video {
+  width: 100%;
+  height: auto; !important
+}
+
+.video-cover {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+}
+
+.video-cover video {
+  object-fit: cover;
+  background: #FECB58;
+  background: linear-gradient(to bottom left,#FECB58,#27AACF);
+}
+
+{% endblock style %}
+{% block content %}
+<div class="video-cover" >
+<video controls>
+<source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>
+Your browser does not support the video tag.
+</video>
+</div>
+{% endblock content %}

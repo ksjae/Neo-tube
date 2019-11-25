@@ -47,9 +47,10 @@
             class="sr-only">(current)</span></a>{% endif %}
         </li>
       </ul>
-      <form class="mx-2 my-auto d-inline w-100">
+      <form class="mx-2 my-auto d-inline w-100" method="POST" action="{% url 'search' %}">
+        {% csrf_token %}
         <div class="input-group">
-          <input type="text" class="form-control border border-right-0 bg-dark text-white border-secondary" placeholder="영상 찾아보기">
+          <input type="text" class="form-control border border-right-0 bg-dark text-white border-secondary" placeholder="영상 찾아보기" name="word" id="word">
           <span class="input-group-append">
             <button class="btn btn-outline-secondary border border-left-0 border-secondary bg-dark text-white " type="button">
               <i class="fa fa-search"></i>

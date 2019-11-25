@@ -70,8 +70,11 @@ def uploadvideo(request):
 	"""
 	return render(request, 'videos.html', context)
 
-class VideoDetailView(DetailView):
-    queryset = Video.objects.all()
+def videoview(request):
+    video = Video.objects.last()
+    context= {'videofile': video,
+			}
+    return render(request, 'view.html', context)
 
 
 
