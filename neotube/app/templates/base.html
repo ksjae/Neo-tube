@@ -39,11 +39,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav" id="navbar_item">
         <li class="nav-item active">
-          <a class="nav-link" href="#">홈</a>{% if url_name == 'index' %}<span
+          <a class="nav-link" href="{% url 'index' %}">홈</a>{% if url_name == 'index' %}<span
             class="sr-only">(current)</span></a>{% endif %}
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">올리기</a>{% if url_name == 'upload' %}<span
+          <a class="nav-link" href="{% url 'upload' %}">올리기</a>{% if url_name == 'upload' %}<span
             class="sr-only">(current)</span></a>{% endif %}
         </li>
       </ul>
