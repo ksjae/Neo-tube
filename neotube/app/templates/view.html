@@ -8,7 +8,7 @@ video {
 
 .video-cover {
   position: relative;
-  height: 350px;
+  height: auto;
   overflow: hidden;
 }
 
@@ -20,10 +20,20 @@ video {
 
 {% endblock style %}
 {% block content %}
+<section>
+<div class="col-lg-12 mx-auto shadow rounded-lg">
+<div class="container">
 <div class="video-cover" >
 <video controls>
 <source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>
 Your browser does not support the video tag.
 </video>
 </div>
+<div class="row">
+<h2 class="col-lg-8 post_title p-5">{{videofile.title}}</h2>
+<h3 class="p-5 col-lg-4 view_count float-right"><small>조회수 </small>3,45,346<small>회</small></h3>
+</div>
+</div>
+</section>
+
 {% endblock content %}

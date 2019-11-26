@@ -8,7 +8,8 @@ class Video(models.Model):
     name = models.CharField(max_length=200)
     videofile= models.FileField(upload_to='videos/', null=True, verbose_name="")
     pub_date = models.DateTimeField(auto_now_add=True)
-    video_url = "404" #서버에서 URL로 보관하여 시청 페이지에서 볼 것
+    video_url = "404"
+    slug = models.SlugField(blank=True)
     uploader = models.CharField(max_length=200)
     views = 0
 

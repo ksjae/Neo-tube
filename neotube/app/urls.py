@@ -12,5 +12,5 @@ urlpatterns = [
             template_name="registration/login.html"
             ), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'), 
-    url(r'^view/$', views.videoview, name='view'),
+    url(r'^view/(?P<videofile>.*)$', views.videoview, name='view'),
 ]

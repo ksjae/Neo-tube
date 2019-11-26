@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}페이지를 찾을 수 없습니다{% endblock title %}
+{% block style %}
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#notfound {
+  position: relative;
+  height: 100vh;
+}
+
+#notfound .notfound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.notfound {
+  max-width: 410px;
+  width: 100%;
+  text-align: center;
+}
+
+.notfound .notfound-404 {
+  height: 280px;
+  position: relative;
+  z-index: -1;
+  white-space: nowrap;
+}
+
+.notfound .notfound-404 h1 {
+  font-family: '나눔명조', 'NanumMyeongjo', sans-serif;
+  font-size: 230px;
+  margin: 0px;
+  font-weight: 900;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background: url('https://colorlib.com/etc/404/colorlib-error-404-10/img/bg.jpg') no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.notfound h2 {
+  font-family: '나눔명조', 'NanumMyeongjo','Montserrat', sans-serif;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+.notfound p {
+  font-family: '나눔명조', 'NanumMyeongjo','Montserrat', sans-serif;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.notfound a {
+  font-family: '나눔명조', 'NanumMyeongjo','Montserrat', sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: #0046d5;
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 700;
+  -webkit-box-shadow: 0px 4px 15px -5px #0046d5;
+          box-shadow: 0px 4px 15px -5px #0046d5;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .notfound .notfound-404 {
+      height: 142px;
+    }
+    .notfound .notfound-404 h1 {
+      font-size: 112px;
+    }
+}
+
+
+{% endblock style %}
+{% block content %}
+<body style="overflow-x: visible !important;">
+<div id="notfound">
+<div class="notfound">
+<div class="notfound-404">
+<h1>어이쿠!</h1>
+</div>
+<h2>404 - 페이지를 찾을 수 없음</h2>
+<p>네, 바로 그 404 에러입니다. 영상이 떠야되는데 이거 뜨네? 이런.</p>
+<a href="{% url 'index' %}">너튜브로 돌아가기</a>
+</div>
+</div>
+
+
+</body>
+{% endblock content %}

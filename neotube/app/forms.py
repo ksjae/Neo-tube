@@ -17,12 +17,8 @@ class VideoForm(forms.ModelForm):
     name = forms.CharField(max_length=200, widget=forms.TextInput(
         attrs={'class':"form-control", 'id':"name", 'placeholder':"영상 제목 입력"}))
     class Meta:
-        model= Video
-        fields= ["name", "videofile"]
-        ordering = ['-timestamp']
-    
-    def get_absolute_url(self):
-        return reverse("deploy:detail", kwargs={"slug":self.slug})
+        model = Video
+        fields = ["name", "videofile"]
 
     def __str__(self):
         return self.Video_Description + ": " + str(self.id)

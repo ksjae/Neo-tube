@@ -1,11 +1,21 @@
-<form action="." method="post"> {% csrf_token %} 
-	{{ form.as_p }} <!-- form --> 
-	<input type="submit"> 
-</form>
+{% extends 'base.html' %}
+{% block title %}Upload Videos{% endblock title %}
+{% block style %}
+{% endblock style %}
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+<h1>검색 결과</h1>
+<br />
  {% if object_list %} <!--검색 결과가 있을 경우-->
+ <ul class="list-group">
  {% for video in object_list %} 
- <a href="{{ MEDIA_URL }}{{ video }}">{{ video }}</a> <!--검색된 리스트를 보여준다.-->
+ <li class="list-group-item"><a href="{% url 'view' video.slug %}">{{ video.name }}</a></li> <!--검색된 리스트를 보여준다.-->
  {% endfor %}
+ </ul>
  {% elif search_word %}  <!--검색 결과가 없을 경우-->
- Search Word {{ search_word }} Not Found!  <!--검색된 결과가 없다는 메세지를 보여준다.-->
+ <strong>{{ search_word }}에 관한 검색 결과를 찾지 못했습니다.</strong>  <!--검색된 결과가 없다는 메세지를 보여준다.-->
  {% endif %}
+ </div> </div> </div>
+ {% endblock %}
