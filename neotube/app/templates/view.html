@@ -30,8 +30,11 @@ Your browser does not support the video tag.
 </video>
 </div>
 <div class="row">
-<h2 class="col-lg-8 post_title p-5">{{videofile.title}}</h2>
-<h3 class="p-5 col-lg-4 view_count float-right"><small>조회수 </small>3,45,346<small>회</small></h3>
+<h2 class="col-lg-8 post_title p-5">{{videofile.name}}</h2>
+<h3 class="p-5 col-lg-4 view_count float-right"><small>조회수 </small>{{videofile.views}}<small>회</small></h3>
+<h5 class="p-5 col-lg-4 view_count float-right">
+{{videofile.uploader}}가 {{videofile.pub_date}}에 올림
+</h5>
 </div>
 </div>
 </section>

@@ -67,19 +67,22 @@ def uploadvideo(request):
         form = raw_form.save(commit=False)
         form.pub_date = datetime.datetime.now()
         form.name = raw_form.cleaned_data['name']
-        slug = slugify(form.name)
+        form.uploader = request.user.get_username()
+        if form.uploader == "":
+            form.uploader = "로그인하지 않은 이용자"
+        form.views = 0
+        slug = slugify(form.name, allow_unicode=True)
         qs_exists = Video.objects.filter(slug=slug).exists()
         if qs_exists:
             new_slug = "{slug}-{randstr}".format(
                         slug=slug,
                         randstr=''.join(random.choice(string.ascii_lowercase) for i in range(4))
                     )
-            slug = slugify(new_slug)
+            slug = slugify(new_slug, allow_unicode=True)
         form.slug = slug
         print(slug)
         form.save()
-        context = {'videofile': slug}
-        return render(request, 'view.html', context)
+        return redirect(reverse('view', kwargs={'videofile':Video.objects.last().slug}), videofile=(Video.objects.last(),))
 
     context = {'videofile': videofile,
                 'form': raw_form
@@ -98,7 +101,8 @@ def videoview(request, videofile):
     vid = list(video_list)
     if vid == []:
         return render(request, '404.html')
-    context={'videofile': vid,
+    Video.objects.filter(slug=videofile).update(views=vid[0].views+1)
+    context={'videofile': vid[0],
             }
     
     return render(request, 'view.html', context)
